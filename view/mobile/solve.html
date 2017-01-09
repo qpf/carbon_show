@@ -1,0 +1,97 @@
+<!--{template header}-->
+<div class="nav_bar">
+    <a href="{url category/view/all}">全部分类</a>
+    <!--{loop $navlist $nav}-->
+    &gt; <a href="{url category/view/$nav['id']}">{$nav['name']}</a> 
+    <!--{/loop}-->
+</div>
+<div class="question-mod">
+    <h2 id="ask_title">{$question['title']}</h2>
+    <div class="ques-info">
+        <span class="item">提问人：
+            <!--{if $question['hidden']}-->
+            匿名
+            <!--{elseif $question['authorid']==0}-->
+            <!--{if $question['ip']}-->{$question['ip']}<!--{else}-->游客<!--{/if}-->
+            <!--{else}-->
+            <a  href="{url user/space/$question['authorid']}">{$question['author']}</a>
+            <!--{/if}-->
+        </span>
+        <span class="item">浏览：{$question['views']}</span>
+        <span class="item">{$question['format_time']}</span>
+    </div>
+    <div class='description'>{$question['description']}</div>
+    <div class='description'>
+        <ul>
+            <!--{loop $supplylist $supply}-->
+            <li><span class="time">问题补充 : {$supply['format_time']}</span>{$supply['content']}</li>
+            <!--{/loop}-->
+        </ul>
+    </div>
+    <!--{if $taglist}-->
+    <div class="question-tags mt10">
+        标签：
+        <!--{loop $taglist $tag}-->
+        <a title="{$tag}" href="{url question/search/tag:$tag}">{$tag}</a>
+        <!--{/loop}-->
+    </div>
+    <!--{/if}-->
+</div>
+
+<div class="answer-box">
+    <div class="bestanswer mt10"><span>最佳答案</span></div>
+    <div class="userinfo">
+        <div class="profile">
+            <a href="{url user/space/$bestanswer['authorid']}"><img src="{$bestanswer['author_avartar']}"></a>
+            <p><a href="{url user/space/$bestanswer['authorid']}">{$bestanswer['author']}</a></p>
+            <span>{$bestanswer['format_time']}</span>
+        </div>
+    </div>
+    <div class="content-mod">
+        <div class="content">{$bestanswer['content']}</div>
+        <!--{if $bestanswer['appends']}-->
+        <div class="append">
+            <!--{loop $bestanswer['appends'] $append}-->       
+            <dl class="append_item">
+                <!--{if $bestanswer['authorid']==$answer['authorid']}-->
+                <dt class="fg-green">回答:</dt>
+                <!--{else}-->
+                <dt class="fg-orange">追问:</dt>
+                <!--{/if}-->
+                <dd>{$append['content']}</dd>                                  
+            </dl>
+            <!--{/loop}-->
+        </div>
+        <!--{/if}-->
+    </div>
+</div>
+<!--{loop $answerlist $index $answer}-->
+<div class="answer-box">
+    <div class="userinfo">
+        <div class="profile">
+            <a href="{url user/space/$answer['authorid']}"><img src="{$answer['author_avartar']}"></a>
+            <p><a href="{url user/space/$answer['authorid']}">{$answer['author']}</a></p>
+            <span>{$answer['time']}</span>
+        </div>
+    </div>
+    <div class="content-mod">
+        <div class="content">{$answer['content']}</div>
+        <!--{if $answer['appends']}-->
+        <div class="append">
+            <!--{loop $answer['appends'] $append}-->       
+            <dl class="append_item">
+                <!--{if $append['authorid']==$answer['authorid']}-->
+                <dt class="fg-green">回答:</dt>
+                <!--{else}-->
+                <dt class="fg-orange">追问:</dt>
+                <!--{/if}-->
+                <dd>{$append['content']}</dd>                                  
+            </dl>
+            <!--{/loop}-->
+        </div>
+        <!--{/if}-->
+    </div>
+</div>
+<!--{/loop}-->
+<div class="pages">{$departstr}</div>	
+<!--{template footer}-->

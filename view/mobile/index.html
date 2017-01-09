@@ -1,0 +1,86 @@
+<!--{template header}-->
+<div class="search_mod">
+    <div class="nav_line">
+        <p>
+            <!--{eval $statistics=$this->fromcache('statistics');}-->
+            已解决问题：<span>{$statistics['solves']}</span>&nbsp;&nbsp;待解决问题：<span>{$statistics['nosolves']}</span>
+        </p>
+    </div>
+    <form name="searchform" id="searchform"  action="{url question/search}" method="POST">
+        <div class="search_form">
+            <div class="input_area">
+                <input type="text" value="" class="search_input" name="word" id="word" placeholder="{$setting['search_placeholder']}"/>
+            </div>
+            <input type="submit" value="搜索"  class="search_btn" name="submit" />
+        </div>
+        <div class="hot_search">
+            <!--{eval $wordslist = unserialize($this->setting['hot_words']);}-->
+            <span class="hot_search_text">热门搜索：</span>
+            <!--{loop $wordslist $hotword}-->
+            <a {if $hotword['qid']}href="{url question/view/$hotword['qid']}" {else}href="{url question/search/$hotword['w']}"{/if}>{$hotword['w']}</a>
+            <!--{/loop}-->
+        </div>
+        <div style="padding:10px 10px 0 10px;"><input type="submit"  id="ask_btn"  value="我要提问" class="btn_submit"  name="ask" /></div>
+    </form>
+</div>
+<div class="main_mod">
+    <h3 class="title">推荐专家</h3>
+    <div class="expertlist">
+        <!--{eval $expertlist=$this->fromcache('expertlist');}-->
+        <!--{loop $expertlist $expert}-->
+        <div class="box">
+            <a href="{url user/space/$expert['uid']}" title="{$expert['name']}">
+                <img src="{$expert['avatar']}" />
+            </a>
+            <p><a href="{url user/space/$expert['uid']}">{$expert['username']}</a></p>
+            <span>{$expert['answers']}回答</span>
+            <a class="btn_ask" href="{url question/add/$expert['uid']}">提问</a>
+
+        </div>
+        <!--{/loop}-->
+    </div>
+    <a class="more" href="{url expert/default}">
+        查看全部专家&gt;&gt;
+    </a>
+</div>
+<div class="main_mod">
+    <h3 class="title">推荐问题</h3>
+    <!--{eval $recommendlist=$this->fromcache('recommendlist');}-->
+    <!--{loop $recommendlist $index $question}-->
+    <ul class="list">	    		
+        <li>
+            <span class="answer-number">{$question['answers']}回答</span>
+            <a href="{url question/view/$question['id']}" title="{$question['title']}">{eval echo cutstr($question['title'],50);}</a>
+            <a class="type" href="{url category/view/$question['cid']}" title="{$question['category_name']}">[{eval echo cutstr($question['category_name'],10,'');}]</a>
+        </li>
+    </ul>
+    <!--{/loop}-->
+    <a class="more" href="{url category/view/all/6}">
+        查看全部问题&gt;&gt;
+    </a>
+</div>
+<div class="main_mod">
+    <h3 class="title">他们正在等待您的帮助</h3>
+    <!--{eval $nosolvelist=$this->fromcache('nosolvelist');}-->
+    <!--{loop $nosolvelist $index $question}-->
+    <ul class="list">	    		
+        <li>
+            <span class="answer-number">{$question['answers']}回答</span>
+            <a href="{url question/view/$question['id']}" title="{$question['title']}">{eval echo cutstr($question['title'],50);}</a>
+            <a class="type" href="{url category/view/$question['cid']}" title="{$question['category_name']}">[{eval echo cutstr($question['category_name'],10,'');}]</a>
+        </li>
+    </ul>
+    <!--{/loop}-->
+    <a class="more" href="{url category/view/all/1}">
+        查看全部问题&gt;&gt;
+    </a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#ask_btn").click(function() {
+            document.searchform.action = "{url question/add}";
+            document.searchform.submit();
+        });
+    });
+</script>
+<!--{template footer}-->

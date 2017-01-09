@@ -1,0 +1,13 @@
+<div class="space_user">
+    <div class="userinfo">
+        <a href="{url user/space/$user['uid']}"><img src="{$user['avatar']}" class="avatar"/></a>
+        <strong><a href="{url user/space/$user['uid']}">{$user['username']}</a>{if $user['expert']}<i class="icon_expert" title='专家'></i>{/if}</strong><!--{if $user['introduction']}--><span>({$user['introduction']})</span><!--{/if}-->
+        <p>{$user['grouptitle']}
+            <!--{if 2==$user['grouptype']}-->
+            <!--{eval $credit1percent=round(($user['credit1']/$user['creditshigher'])*100);}-->
+            离下一级[<font color="green">{$nextgroup['grouptitle']}</font>] 还需 <font color="red">{$higherneeds}</font> 经验值
+            <!--{/if}-->
+        </p>
+        <a href="{url user/profile}" class="btn_ask3">编辑资料</a>    
+    </div>
+</div>

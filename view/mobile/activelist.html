@@ -1,0 +1,19 @@
+<!--{template header}-->
+<div class="main_mod">
+    <h3 class="title">活跃用户</h3>
+    <div class="expertlist">
+        <!--{loop $userlist $activeuser}-->  
+        <div class="box">
+            <a href="{url user/space/$activeuser['uid']}" title="{activeuser['name']}">
+                <img src="{$activeuser['avatar']}" />
+            </a>
+            <p><a href="{url user/space/$activeuser['uid']}">{$activeuser['username']}</a></p>
+            <span>{$activeuser['answers']}回答</span>
+            <a class="btn_ask" href="{url question/add/$activeuser['uid']}">提问</a>
+
+        </div>
+        <!--{/loop}-->
+    </div>
+</div>
+<div class="pages">{$departstr}</div>   
+<!--{template footer}-->

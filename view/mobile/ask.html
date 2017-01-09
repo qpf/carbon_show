@@ -1,0 +1,51 @@
+<!--{template header}-->
+<!--{if $touser}--><div class="nav_bar mt10">正在向 <a href="{url user/space/$touser['uid']}">{$touser['username']}</a> 提问</div><!--{/if}-->
+<div class="askmod">
+    <form method="POST" action="{url question/add}" name="askform" id="askform" onsubmit="return check_form();" >
+        <input type="hidden" value="{$askfromuid}" name="askfromuid" />  
+        <div class="input_bar1">
+            <textarea class="title" placeholder="这里简要描述您的问题" id="qtitle" name="title"></textarea>
+        </div>
+        <div class="input_bar2 mt15">
+            <textarea class="description" placeholder="在这里补充问题的详细信息，详细全面的问题往往有助于其他网友提供高质量的解答" id="description" name="description"></textarea>
+        </div>
+        <div class="mt15">
+            问题分类 ：<select class="category_select" name="cid" id="cid">
+                <!--{$catetree}-->
+            </select>
+        </div>
+        <div class="mt15">
+            悬赏积分 ：<select name="givescore" id="scorelist" class="category_select"><option selected="selected" value="0">0</option><option value="3">3</option><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="30">30</option><option value="50">50</option><option value="80">80</option><option value="100">100</option></select>
+        </div>
+        <!--{if $user['uid']}-->
+        <div class="mt15">
+            匿名提问 ：<input type="checkbox" name="hidanswer" id="hidanswer" value="1" />&nbsp;是
+        </div>
+        <!--{/if}-->
+        <input type="submit" onfocus="this.blur();" value="提交问题" id="qsubmit" class="btn_submit mt20" name="submit" />
+    </form>
+</div>
+<script type="text/javascript">
+    function check_form() {
+        var qtitle = $("#qtitle").val();
+        if (bytes($.trim(qtitle)) < 8 || bytes($.trim(qtitle)) > 100) {
+        alert("问题标题长度不得少于4个字，不能超过50字！");
+                $("#qtitle").focus();
+                return false;
+        }
+        {if $user['uid']}
+        //检查财富值是否够用
+        var offerscore = 0;
+        var selectsocre = $("#givescore").val();
+        if ($("#hidanswer:selected").val() == 1) {
+            offerscore += 10;
+        }
+        offerscore += parseInt(selectsocre);
+        if (offerscore > $user['credit2']) {
+        alert("你的财富值不够!");
+                return false;
+        }
+        {/if}  
+    }
+</script>
+<!--{template footer}-->

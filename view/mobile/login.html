@@ -1,0 +1,70 @@
+<!--{template header}-->
+<div class="loginmod">
+    <form name="loginform"  action="{url user/login}" method="post" onsubmit="return checkform();">
+        <ul class="input_box">
+            <input type="text" id="username" name="username"  placeholder="请输入账号"/>
+        </ul>
+        <ul id="user_error" class="login_error_tip"></ul>
+        <ul class="input_box">
+            <input type="password" id="password" name="password"  placeholder="请输入密码" />
+        </ul>
+        <ul id="passwd_error" class="login_error_tip"></ul>
+        <ul class="input_box2">
+            <input type="checkbox" id="cookietime" name="cookietime" value="2592000" />下次自动登录
+        </ul>
+        <input type="submit"  value="登 录" class="btn_submit"  name="submit" />
+        <ul class="input_box3">
+            <a href="{url user/register}">立即注册</a>
+            <a href="{url user/getpass}">忘记密码？</a>
+        </ul>
+        <input type="hidden" name="forward" value="{$forward}"/>
+    </form>
+</div>
+<div class="third_part_login">
+    <p>使用其他方式登录</p>
+    <!--{if $setting['qqlogin_open']}-->
+    <a class="qq_login" href="{SITE_URL}plugin/qqlogin/index.php">QQ</a>
+    <!--{/if}-->
+    <!--{if $setting['sinalogin_open']}-->
+    <a class="sina_login" href="{SITE_URL}plugin/sinalogin/index.php">新浪微博</a>
+    <!--{/if}-->
+</div>
+<script type="text/javascript">
+    function checkform() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        if ($.trim(username) === '') {
+            $("#user_error").html("请输入您的账号");
+            $("#username").focus();
+            return false;
+        }
+        $("#user_error").html("");
+        if (password === '') {
+            $("#passwd_error").html("请输入您的密码");
+            $("#password").focus();
+            return false;
+        }
+        $("#passwd_error").html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            cache: false,
+            url: "{SITE_URL}index.php?user/ajaxlogin",
+            data: "username=" + $.trim(username) + "&password=" + password,
+            success: function(ret) {
+                if (ret == '-1') {
+                    $("#user_error").html("用户名或密码错误");
+                } else {
+                    $("#user_error").html("");
+                }
+            }
+        });
+        if ($("#user_error").html() != '') {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+</script>
+<!--{template footer}-->

@@ -1,0 +1,50 @@
+<!--{template header}-->
+<!--{template space_menu}-->
+<dl class="space_count">
+    <dt>
+    <p>回答</p>
+    <span><em><a href="{url user/space_answer/$member['uid']}">{$member['answers']}</a></em></span>
+    </dt>
+    <dt>
+    <p>提问</p>
+    <span><em><a href="{url user/space_ask/$member['uid']}">{$member['questions']}</a></em></span>
+    </dt>
+    <dt>
+    <p>财富</p>
+    <span><em>{$member['credit2']}</em></span>
+    </dt>
+    <dt>
+    <p>采纳率</p>
+    <span><em>{$adoptpercent}%</em></span>
+    </dt>
+</dl>
+
+<div class="space_count">
+    <div class="info">
+        <div class="modbox">
+            <ol>擅长</ol>
+            <ul>
+                <!--{if $member['category']}-->
+                <!--{loop $member['category'] $category}-->
+                <a href="{url category/view/$category['cid']}">{$category['categoryname']}</a>
+                <!--{/loop}-->
+                <!--{else}-->
+                暂无
+                <!--{/if}--> 
+            </ul>
+        </div>
+        <div class="modbox">
+            <ol>简介</ol>
+            <ul>{if $member['signature']}{$member['signature']}{else}暂无介绍{/if}</ul>
+        </div>
+        <div class="modbox">
+            <ol>注册日期</ol>
+            <ul>{$member['register_time']}</ul>
+        </div>
+        <div class="modbox">
+            <ol>最近更新</ol>
+            <ul>{$member['refresh_time']}</ul>
+        </div>
+    </div>
+</div>
+<!--{template footer}-->

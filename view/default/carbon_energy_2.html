@@ -1,0 +1,119 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="js/esl.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+        <div class="row" style="margin:0px 0px 10px 10px">
+			<div style="font-size:20px;color:red;margin:0px 0px 0px 0px;float:left;">能源结构</div>
+		</div>
+		
+		<div id="main" style="height:400px;width:650px;"></div>
+		<div>
+			<table class="table table-bordered table-striped table-hover" style="font-size:8px;">
+				<tr>
+					<td>能源结构类型</td>
+					<td>说明</td>
+				</tr>
+				<tr>
+					<td>① 煤炭+发生炉煤气</td>
+					<td>该类能源结构主要应用于山西运城地区镁冶炼企业，煤炭主要来自陕西榆林地区，块煤用于造气，生产发生炉煤气用于还原、精炼工段，煤粉用于白云石煅烧工段。</td>
+				</tr>
+				<tr>
+					<td>② 煤炭+天然气</td>
+					<td>该类能源结构目前应用较少，主要因为天然气成本较高。同上，煤炭主要用于白云石煅烧工段，还原、精炼工段采用天然气供能。</td>
+				</tr>
+				<tr>
+					<td>③ 焦炉煤气</td>
+					<td>该类能源结构主要应用于山西部分焦煤丰富地区的镁冶炼企业，形成焦炭-镁冶炼共生产业形式，皮江法镁冶炼全过程均主要采用焦炉煤气供热。</td>
+				</tr>
+				<tr>
+					<td>④ 兰炭尾气</td>
+					<td>该类能源结构主要应用于陕西榆林地区镁冶炼企业，形成兰炭-镁冶炼共生产业形式，皮江法镁冶炼全过程均主要采用兰炭尾气供热</td>
+				</tr>
+			</table>
+		</div>
+    </div>
+	
+	<script type="text/javascript">
+        // 路径配置
+        require.config({
+        	paths: {
+        		'echarts': 'js/echarts',
+        		'echarts/chart/pie': 'js/echarts'
+        		}
+        		});
+
+        		//堆叠柱状图
+        		require(
+        			[
+        				'echarts',
+        				'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+        			],
+        			function (ec) {
+        			// 基于准备好的dom，初始化echarts图表
+        			var myChart = ec.init(document.getElementById('main'));
+
+        			option = {
+        				title: {
+        					text: '能源分布统计表',
+        					x: 'center'
+        				},
+        				tooltip: {
+        					trigger: 'item',
+        					formatter: "{a} <br/>{b} : {c} ({d}%)"
+        				},
+        				legend: {
+        					orient: 'vertical',
+        					x: 'left',
+        					data: ['发生炉煤气+煤炭', '天然气+煤炭', '兰炭尾气', '焦炉煤气']
+        				},
+        				toolbox: {
+        					show: true,
+        					feature: {
+        						dataView: {
+        							show: true,
+        							readOnly: false
+        						},
+        						restore: {
+        							show: true
+        						},
+        						saveAsImage: {
+        							show: true
+        						}
+        					}
+        				},
+        				calculable: true,
+        				series: [{
+        						name: '能源分布',
+        						type: 'pie',
+        						radius: '55%',
+        						center: ['50%', '60%'],
+        						data: [{
+        								value: 34,
+        								name: '发生炉煤气+煤炭'
+        							}, {
+        								value: 6,
+        								name: '天然气+煤炭'
+        							}, {
+        								value: 45,
+        								name: '兰炭尾气'
+        							}, {
+        								value: 14,
+        								name: '焦炉煤气'
+        							}
+        						]
+        					}
+        				]
+        			};
+
+        			// 为echarts对象加载数据
+        			myChart.setOption(option);
+        });
+    </script>
+	
+</body>
+</html>

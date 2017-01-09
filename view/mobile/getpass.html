@@ -1,0 +1,18 @@
+<!--{template header}-->
+<div class="loginmod">
+    <form name="getpassform"  action="{url user/getpass}" method="post">
+        <ul class="input_box">
+            <input type="text" id="username" name="username"  placeholder="用户名"/>
+        </ul>
+        <ul class="input_box">
+            <input type="text" id="email" name="email"  placeholder="邮箱地址" />
+        </ul>
+        <ul class="input_box3"></ul>
+        <input type="submit"  value="提 交" class="btn_submit"  name="submit" />
+        <ul class="input_box3">
+            <a href="mailto:{$setting['admin_email']}" target="_blank">还有问题？请联系我们</a>
+        </ul>
+        <input type="hidden" name="forward" value="{$forward}"/>
+    </form>
+</div>
+<!--{template footer}-->

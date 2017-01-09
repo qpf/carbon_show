@@ -1,0 +1,23 @@
+<!--{template header}-->
+<!--{loop $expertlist $expert}-->
+<dl class="expert_mod">
+    <dt>
+    <a href="{url user/space/$expert['uid']}">
+        <img width="30" height="30" src="{$expert['avatar']}">
+    </a>
+    <p><a href="{url user/space/$expert['uid']}">{$expert['username']}</a><!--{if $expert['introduction']}--><span>{$expert['introduction']}</span><!--{/if}--></p>
+    <a class="btn_ask2" href="{url question/add/$expert[uid]}">向TA提问</a>
+    </dt>
+    <dd>
+        <ul style="overflow:visible;">
+            <span>擅长：</span>  
+            <!--{loop $expert['category'] $category}-->
+            <a  href="{url category/view/$category['cid']}">{$category['categoryname']}</a>
+            <!--{/loop}--></ul>
+        <ul style="overflow:visible;"><span>{$expert['answers']}回答</span><span>{$expert['supports']}赞同</span></ul>
+        <ul style="overflow:visible;"><span>介绍：</span>{$expert['introduction']}</ul>
+    </dd>
+</dl>
+<!--{/loop}-->
+<div class="pages">{$departstr}</div>	
+<!--{template footer}-->

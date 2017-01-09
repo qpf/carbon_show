@@ -1,0 +1,21 @@
+<!--{template header}-->
+<!--{template space_menu}-->
+<div class="space_tab">
+    <ul>
+        <li style="width:50%;"><a href="{url user/space_answer/$member['uid']}">TA的回答</a></li>
+        <li style="width:50%;"><a  class="active" href="{url user/space_ask/$member['uid']/all}">TA的提问</a></li>
+    </ul>
+</div>
+<!--{loop $questionlist $question}-->
+<div class="search_list">
+    <div class="result_content">
+        <a href="{url question/view/$question['id']}">
+            <h4>{$question['title']}<!--{if in_array($question['status'],array(2,6))}--><img title="已解决" src="{SITE_URL}css/mobile/solved.gif" /><!--{/if}--></h4>
+            <div class="description">{eval echo cutstr(strip_tags($question['description']),250,'...');}</div>
+            <div class="info">{$question['answers']}回答 - 时间: {$question['format_time']}</div>
+        </a>
+    </div>
+</div>
+<!--{/loop}-->
+<div class="pages">{$departstr}</div>
+<!--{template footer}-->

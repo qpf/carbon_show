@@ -1,0 +1,20 @@
+<!--{template header}-->
+<div class="loginmod">
+    <form method="POST" name="upinfoForm"  action="{url user/profile}">
+        <ul class="input_box">
+            <input type="text" name="email" id="email" placeholder="用户邮箱" {if $user['email']!='null'} value="{$user['email']}"{else}value=""{/if}/>
+        </ul>
+        <ul class="input_box">
+            <input name="phone" id="phone"   placeholder="手机" value="{$user['phone']}"/>
+        </ul>
+        <ul class="input_box">
+            <input type="text" name="introduction" id="introduction" placeholder="身份介绍" value="{$user['introduction']}"/>
+        </ul>
+        <ul class="input_box">
+            <input type="text" name="signature" id="signature" placeholder="简介" value="{$user['signature']}"/>
+        </ul>
+        <ul class="input_box2"></ul>
+        <input type="submit"   value="保 存" class="btn_submit"  name="submit" />
+    </form>
+</div>
+<!--{template footer}-->

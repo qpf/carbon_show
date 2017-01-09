@@ -1,0 +1,112 @@
+<!--{template header}-->
+<div class="loginmod">
+    <form name="loginform"  action="{url user/register}" method="post" onsubmit="return checkform();">
+        <ul class="input_box">
+            <input type="text" id="username" name="username"  placeholder="用户名"/>
+        </ul>
+        <ul id="usernametip" class="login_error_tip"></ul>
+        <ul class="input_box">
+            <input type="password" id="password" name="password"  placeholder="登陆密码" />
+        </ul>
+        <ul id="passwordtip" class="login_error_tip"></ul>
+        <ul class="input_box">
+            <input type="password" id="repassword" name="repassword"  placeholder="密码确认" />
+        </ul>
+        <ul id="repasswordtip" class="login_error_tip"></ul>
+        <ul class="input_box">
+            <input type="text" id="email" name="email"  placeholder="电子邮箱" />
+        </ul>
+        <ul id="emailtip" class="login_error_tip"></ul>
+        <ul class="input_box2"></ul>
+        <input type="submit"   value="注 册" class="btn_submit"  name="submit" />
+        <ul class="input_box3">
+            <a href="{url user/login}">已有账号？立即登陆!</a>
+        </ul>
+        <input type="hidden" name="forward" value="{$forward}"/>
+    </form>
+</div>
+<script type="text/javascript">
+    var usernameok = 1;
+    var passwordok = 1;
+    var repasswdok = 1;
+    var emailok = 1;
+    function check_username() {
+        var username = $.trim($('#username').val());
+        var length = bytes(username);
+        if (length < 3 || length > 15) {
+            $('#usernametip').html("用户名请使用3到15个字符");
+            usernameok = false;
+        } else {
+            $.post("{SITE_URL}index.php?user/ajaxusername", {username: username}, function(flag) {
+                if (-1 == flag) {
+                    $('#usernametip').html("此用户名已经存在");
+                    usernameok = false;
+                } else if (-2 == flag) {
+                    $('#usernametip').html("用户名含有禁用字符");
+                    usernameok = false;
+                } else {
+                    $('#usernametip').html("");
+                    usernameok = true;
+                }
+            });
+        }
+    }
+
+    function check_passwd() {
+        var passwd = $('#password').val();
+        if (bytes(passwd) < 6 || bytes(passwd) > 16) {
+            $('#passwordtip').html("密码最少6个字符，最长不得超过16个字符");
+            passwordok = false;
+        } else {
+            $('#passwordtip').html("");
+            passwordok = 1;
+        }
+    }
+
+    function check_repasswd() {
+        repasswdok = 1;
+        var repassword = $('#repassword').val();
+        if (bytes(repassword) < 6 || bytes(repassword) > 16) {
+            $('#repasswordtip').html("密码最少6个字符，最长不得超过16个字符");
+             repasswdok = false;
+        } else {
+            if ($('#password').val() == $('#repassword').val()) {
+                $('#repasswordtip').html("");
+                repasswdok = true;
+            } else {
+                $('#repasswordtip').html("两次密码输入不一致");
+                repasswdok = false;
+            }
+        }
+    }
+
+    function check_email() {
+        var email = $.trim($('#email').val());
+        if (!email.match(/^[\w\.\-]+@([\w\-]+\.)+[a-z]{2,4}$/ig)) {
+            $('#emailtip').html("邮件格式不正确");
+            usernameok = false;
+        } else {
+            $.post("{SITE_URL}index.php?user/ajaxemail", {email: email}, function(flag) {
+                if (-1 == flag) {
+                    $('#emailtip').html("此邮件地址已经注册");
+                    emailok = false;
+                } else if (-2 == flag) {
+                    $('#emailtip').html("邮件地址被禁止注册");
+                    emailok = false;
+                } else {
+                    emailok = true;
+                    $('#emailtip').html("");
+                }
+            });
+        }
+    }
+
+    function checkform() {
+        check_username();
+        check_passwd();
+        check_repasswd();
+        check_email();
+        return (usernameok && passwordok && repasswdok && emailok);
+    }
+</script>
+<!--{template footer}-->

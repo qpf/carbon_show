@@ -1,0 +1,23 @@
+<!--{template header}-->
+<div class="nav_bar">{$setting['site_name']}为您找到相关结果约{$rownum}个</div>
+<div class="search_form">
+    <form name="searchform"  action="{url question/search}" method="POST">
+        <div class="input_area">
+            <input type="text" value="{$word}" class="search_input" name="word" id="word" placeholder="{$setting['search_placeholder']}"/>
+        </div>
+        <input type="submit" value="搜索"  class="search_btn" name="submit" />
+    </form>
+</div>
+<!--{loop $questionlist $question}-->
+<div class="search_list">
+    <div class="result_content">
+        <a href="{url question/view/$question['id']}">
+            <h4>{$question['title']}<!--{if in_array($question['status'],array(2,6))}--><img title="已解决" src="{SITE_URL}css/mobile/solved.gif" /><!--{/if}--></h4>
+            <div class="description">{eval echo cutstr($question['description'],250,'...');}</div>
+            <div class="info">{$question['answers']}回答 - 时间: {$question['format_time']}</div>
+        </a>
+    </div>
+</div>
+<!--{/loop}-->
+<div class="pages">{$departstr}</div>
+<!--{template footer}-->

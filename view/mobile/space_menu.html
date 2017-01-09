@@ -1,0 +1,8 @@
+<div class="space_user">
+    <div class="userinfo">
+        <a href="{url user/space/$member['uid']}"><img src="{$member['avatar']}" class="avatar"/></a>
+        <strong><a href="{url user/space/$member['uid']}">{$member['username']}</a>{if $member['expert']}<i class="icon_expert" title='专家'></i>{/if}</strong><!--{if $member['introduction']}--><span>({$member['introduction']})</span><!--{/if}-->
+        <p>{$member['grouptitle']}</p>
+        <a href="{url question/add/$member['uid']}" class="btn_ask3">向TA提问</a>    
+    </div>
+</div>

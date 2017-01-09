@@ -1,0 +1,435 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<!-- <script src="js/echarts.js" type="text/javascript"></script> -->
+	<script src="js/echarts-all.js"></script>
+
+	<script>
+	
+		$(document).ready(function(){ 
+			$("#view").css("display","none");
+		}); 
+	
+		function my_switch(v){          
+			if(v==1){
+				$("#view").css("display","block");
+				$("#chart").css("display","none");
+			}else{
+				$("#view").css("display","none");
+				$("#chart").css("display","block");
+			}
+		}
+	</script>
+
+	</script>
+	</script>
+	</script>
+</head>
+<body>
+	
+<div class="container-fluid">
+        <div class="row" style="margin:0px 0px 10px 10px">
+			<div style="font-size:20px;color:red;margin:0px 0px 0px 0px;float:left;">产能分布情况</div>
+			<div style="float:right;">
+				<select class="form-control" onchange="my_switch(this.value)">
+					<option value=1>图形显示</option>
+					<option value=2 selected="selected">数据表显示</option>
+				</select>
+			</div>
+		</div>
+		
+		<div id="view" style="height:400px;display:block;"></div>
+		
+		<div id="chart" class="row" align="center" style="margin:10px 0px 0px 0px;display:block;">
+			<table class="table table-bordered table-striped table-hover" style="font-size:8px;">
+				<!—{loop $result $row}-->
+					<tr>
+						<td>$row['a']</td>
+						<td>$row['b']</td>
+						<td>$row['c']</td>
+						<td>$row['d']</td>
+						<td>$row['e']</td>
+						<td>$row['f']</td>
+					</tr>
+				<!—{/loop}-->
+			</table>
+		</div>
+		
+		<div id="main" style="height:400px;width:650px;margin:20px 0px 0px 0px;">
+		</div>
+		<div>
+			<p style="text-indent: 1cm">2005年，镁冶炼产能主要集中在山西、宁夏、陕西等省区，3省区镁产量占全国总产量的90%左右。“十五”期间，镁冶炼企业逐步向规模化发展，产业集中度不断提高，2005年，全国镁冶炼产能大于1.0万吨的企业有27家，其中10家企业的原镁年产量超过1.0万吨，占国内原镁总产量的52.79%。
+2010年，我国原镁产能达到138.87万吨，镁冶炼产能主要分布在山西、陕西、宁夏等省区，其中，山西镁产量约占总产量57%，同时，陕西省镁行业发展迅速，2010年陕西镁产量同比增长约84%。
+截止2015年，全国镁冶炼产能达到140.25万吨，以陕西、山西、宁夏为主，陕西省原镁产量到达全国总产量的42.3%，山西省达到26.7%，两省产量占总产量的81%。
+</p>
+		</div>
+    </div>
+	
+	<script>
+		var myChart = echarts.init(document.getElementById('view'));
+		option = {
+			legend: {
+				data: ['{$result[1]['a']}', '{$result[2]['a']}', '{$result[3]['a']}', '{$result[4]['a']}', '{$result[5]['a']}', '{$result[6]['a']}', '{$result[7]['a']}', '{$result[8]['a']}', '{$result[9]['a']}', '{$result[10]['a']}']
+			},
+			toolbox: {
+				show: true,
+				orient: 'vertical',
+				x: 'right',
+				y: 'center',
+				feature: {
+					mark: {
+						show: true
+					},
+					dataView: {
+						show: true,
+						readOnly: false
+					},
+					magicType: {
+						show: true,
+						type: ['line', 'bar','stack','tiled']
+					},
+					restore: {
+						show: true
+					},
+					saveAsImage: {
+						show: true
+					}
+				}
+			},
+			calculable: true,
+			xAxis: [{
+					type: 'category',
+					data: ['2003年', '2009年', '2011年', '2012年', '2013年']
+				}
+			],
+			yAxis: [{
+					type: 'value'
+				}
+			],
+			series: [{
+					name: '{$result[1]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[1]['b']}, {$result[1]['c']}, {$result[1]['d']}, {$result[1]['e']}, {$result[1]['f']}]
+				}, {
+					name: '{$result[2]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[2]['b']}, {$result[2]['c']}, {$result[2]['d']}, {$result[2]['e']}, {$result[2]['f']}]
+				}, {
+					name: '{$result[3]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[3]['b']}, {$result[3]['c']}, {$result[3]['d']}, {$result[3]['e']}, {$result[3]['f']}]
+				}, {
+					name: '{$result[4]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[4]['b']}, {$result[4]['c']}, {$result[4]['d']}, {$result[4]['e']}, {$result[4]['f']}]
+				}, {
+					name: '{$result[5]['a']}',
+					type: 'bar',
+					barWidth: 5,
+					stack: 'stack_1',
+					data: [{$result[5]['b']}, {$result[5]['c']}, {$result[5]['d']}, {$result[5]['e']}, {$result[5]['f']}]
+				}, {
+					name: '{$result[6]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[6]['b']}, {$result[6]['c']}, {$result[6]['d']}, {$result[6]['e']}, {$result[6]['f']}]
+				}, {
+					name: '{$result[7]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[7]['b']}, {$result[7]['c']}, {$result[7]['d']}, {$result[7]['e']}, {$result[7]['f']}]
+				}, {
+					name: '{$result[8]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[8]['b']}, {$result[8]['c']}, {$result[8]['d']}, {$result[8]['e']}, {$result[8]['f']}]
+				}, {
+					name: '{$result[9]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[9]['b']}, {$result[9]['c']}, {$result[9]['d']}, {$result[9]['e']}, {$result[9]['f']}]
+				}, {
+					name: '{$result[10]['a']}',
+					type: 'bar',
+					stack: 'stack_1',
+					data: [{$result[10]['b']}, {$result[10]['c']}, {$result[10]['d']}, {$result[10]['e']}, {$result[10]['f']}]
+				}
+			]
+		};
+
+		myChart.setOption(option);
+	</script>
+	
+	<script>
+		var myChart = echarts.init(document.getElementById('main'));
+		var idx = 1;
+		var option = {
+			timeline: {
+				data: [
+					'2003', '2009', '2011', '2012', '2013'
+				],
+				label: {
+					formatter: function (s) {
+						return s.slice(0, 7);
+					}
+				}
+			},
+			options: [{
+					title: {
+						x:'center',
+						text: '产能分布情况变化'
+					},
+					tooltip: {
+						trigger: 'item',
+						formatter: "{a} <br/>{b} : {c} ({d}%)"
+					},
+					legend: {
+						x:'left',
+						orient:'vertical',
+						data: [
+						'{$result[1]['a']}'
+						, '{$result[2]['a']}'
+						, '{$result[3]['a']}'
+						, '{$result[4]['a']}'
+						, '{$result[5]['a']}'
+						, '{$result[6]['a']}'
+						, '{$result[7]['a']}'
+						, '{$result[8]['a']}'
+						, '{$result[9]['a']}'
+						, '{$result[10]['a']}'
+						]
+					},
+					toolbox: {
+						show: true,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							magicType: {
+								show: true,
+								type: ['pie', 'funnel'],
+								option: {
+									funnel: {
+										x: '25%',
+										width: '50%',
+										funnelAlign: 'left',
+										max: 1700
+									}
+								}
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					series: [{
+							name: '产能分布情况变化',
+							type: 'pie',
+							center: ['50%', '65%'],
+							radius: '50%',
+							data: [{
+									value: {$result[1]['b']},
+									name: "{$result[1]['a']}"
+								}, {
+									value: {$result[2]['b']},
+									name: "{$result[2]['a']}"
+								}, {
+									value: {$result[3]['b']},
+									name: "{$result[3]['a']}"
+								}, {
+									value: {$result[4]['b']},
+									name: "{$result[4]['a']}"
+								}, {
+									value: {$result[5]['b']},
+									name: "{$result[5]['a']}"
+								}, {
+									value: {$result[6]['b']},
+									name: "{$result[6]['a']}"
+								}, {
+									value: {$result[7]['b']},
+									name: "{$result[7]['a']}"
+								}, {
+									value: {$result[8]['b']},
+									name: "{$result[8]['a']}"
+								}, {
+									value: {$result[9]['b']},
+									name: "{$result[9]['a']}"
+								}, {
+									value: {$result[10]['b']},
+									name: "{$result[10]['a']}"
+								}
+							]
+						}]},{series: [{
+							name: '产能分布情况变化',
+							type: 'pie',
+							center: ['50%', '65%'],
+							radius: '50%',
+							data: [{
+									value: {$result[1]['c']},
+									name: "{$result[1]['a']}"
+								}, {
+									value: {$result[2]['c']},
+									name: "{$result[2]['a']}"
+								}, {
+									value: {$result[3]['c']},
+									name: "{$result[3]['a']}"
+								}, {
+									value: {$result[4]['c']},
+									name: "{$result[4]['a']}"
+								}, {
+									value: {$result[5]['c']},
+									name: "{$result[5]['a']}"
+								}, {
+									value: {$result[6]['c']},
+									name: "{$result[6]['a']}"
+								}, {
+									value: {$result[7]['c']},
+									name: "{$result[7]['a']}"
+								}, {
+									value: {$result[8]['c']},
+									name: "{$result[8]['a']}"
+								}, {
+									value: {$result[9]['c']},
+									name: "{$result[9]['a']}"
+								}, {
+									value: {$result[10]['c']},
+									name: "{$result[10]['a']}"
+								}
+							]
+						}]},{series: [{
+							name: '产能分布情况变化',
+							type: 'pie',
+							center: ['50%', '65%'],
+							radius: '50%',
+							data: [{
+									value: {$result[1]['d']},
+									name: "{$result[1]['a']}"
+								}, {
+									value: {$result[2]['d']},
+									name: "{$result[2]['a']}"
+								}, {
+									value: {$result[3]['d']},
+									name: "{$result[3]['a']}"
+								}, {
+									value: {$result[4]['d']},
+									name: "{$result[4]['a']}"
+								}, {
+									value: {$result[5]['d']},
+									name: "{$result[5]['a']}"
+								}, {
+									value: {$result[6]['d']},
+									name: "{$result[6]['a']}"
+								}, {
+									value: {$result[7]['d']},
+									name: "{$result[7]['a']}"
+								}, {
+									value: {$result[8]['d']},
+									name: "{$result[8]['a']}"
+								}, {
+									value: {$result[9]['d']},
+									name: "{$result[9]['a']}"
+								}, {
+									value: {$result[10]['d']},
+									name: "{$result[10]['a']}"
+								}
+							]
+						}]},{series: [{
+							name: '产能分布情况变化',
+							type: 'pie',
+							center: ['50%', '65%'],
+							radius: '50%',
+							data: [{
+									value: {$result[1]['e']},
+									name: "{$result[1]['a']}"
+								}, {
+									value: {$result[2]['e']},
+									name: "{$result[2]['a']}"
+								}, {
+									value: {$result[3]['e']},
+									name: "{$result[3]['a']}"
+								}, {
+									value: {$result[4]['e']},
+									name: "{$result[4]['a']}"
+								}, {
+									value: {$result[5]['e']},
+									name: "{$result[5]['a']}"
+								}, {
+									value: {$result[6]['e']},
+									name: "{$result[6]['a']}"
+								}, {
+									value: {$result[7]['e']},
+									name: "{$result[7]['a']}"
+								}, {
+									value: {$result[8]['e']},
+									name: "{$result[8]['a']}"
+								}, {
+									value: {$result[9]['e']},
+									name: "{$result[9]['a']}"
+								}, {
+									value: {$result[10]['e']},
+									name: "{$result[10]['a']}"
+								}
+							]
+						}]},{series: [{
+							name: '产能分布情况变化',
+							type: 'pie',
+							center: ['50%', '65%'],
+							radius: '50%',
+							data: [{
+									value: {$result[1]['f']},
+									name: "{$result[1]['a']}"
+								}, {
+									value: {$result[2]['f']},
+									name: "{$result[2]['a']}"
+								}, {
+									value: {$result[3]['f']},
+									name: "{$result[3]['a']}"
+								}, {
+									value: {$result[4]['f']},
+									name: "{$result[4]['a']}"
+								}, {
+									value: {$result[5]['f']},
+									name: "{$result[5]['a']}"
+								}, {
+									value: {$result[6]['f']},
+									name: "{$result[6]['a']}"
+								}, {
+									value: {$result[7]['f']},
+									name: "{$result[7]['a']}"
+								}, {
+									value: {$result[8]['f']},
+									name: "{$result[8]['a']}"
+								}, {
+									value: {$result[9]['f']},
+									name: "{$result[9]['a']}"
+								}, {
+									value: {$result[10]['f']},
+									name: "{$result[10]['a']}"
+								}
+							]
+						}
+					]
+				}
+			]
+		};
+
+		// 为echarts对象加载数据
+		myChart.setOption(option);
+	</script>
+
+	
+</body>
+</html>

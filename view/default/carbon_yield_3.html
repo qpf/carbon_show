@@ -1,0 +1,38 @@
+<!--{template carbon_header}-->
+<script>
+	function my_switch(v){          
+		if(v==1){
+			$("#graph").css("display","block");
+			$("#chart").css("display","none");
+		}else{
+			$("#graph").css("display","none");
+			$("#chart").css("display","block");
+		}
+    }
+</script>
+	<div id="main" class="col-md-9" >
+		<div class="row" style="margin:0px 0px 10px 10px">
+			<div class="col-md-3" style="font-size:20px;color:red;margin:0px 0px 0px 0px;">产量分布</div>
+			<div class="col-md-2 col-md-offset-2">
+				<select class="form-control" onchange="my_switch_2(this.value)">
+					<option value=1>2008</option>
+					<option value=2>2009</option>
+					<option value=2>2010</option>
+					<option value=2>2011</option>
+					<option value=2>2012</option>
+					<option value=2>2013</option>
+					<option value=2>2014</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+				<select class="form-control" onchange="my_switch(this.value)">
+					<option value=1>图形显示</option>
+					<option value=2 selected="selected">数据表显示</option>
+				</select>
+			</div>
+		</div>
+		<div id="graph" class="row" align="center" style="margin:10px 0px 0px 0px;">
+			<img style="height:400px;width:600px" src="{SITE_URL}css/default/yield_5.png"/>
+		</div>
+	</div>
+<!--{template carbon_footer}--}-->

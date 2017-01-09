@@ -1,0 +1,170 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="js/echarts.js" type="text/javascript"></script>
+	<script>
+		function my_switch(v){          
+			if(v==1){
+				$("#graph").css("display","block");
+				$("#chart").css("display","none");
+			}else{
+				$("#graph").css("display","none");
+				$("#chart").css("display","block");
+			}
+		}
+	</script>
+
+</head>
+<body>
+<div class="container-fluid">
+        <div class="row" style="margin:0px 0px 10px 10px">
+			<div style="font-size:20px;color:red;margin:0px 0px 0px 0px;float:left;">产能结构情况</div>
+			<div style="float:right;">
+				<select class="form-control" onchange="my_switch(this.value)">
+					<option value=1>图形显示</option>
+					<option value=2 selected="selected">数据表显示</option>
+				</select>
+			</div>
+		</div>
+		<div id="graph" class="row"style="margin:10px 0px 0px 0px;display:none;">
+			<div id="view_1" style="height:200px;width:320px;float:left;border:1px solid #000;"></div>
+			<div id="view_2" style="height:200px;width:320px;float:left;border:1px solid #000;margin:0px 0px 0px 30px;"></div>
+			<div id="view_3" style="height:200px;width:320px;float:left;border:1px solid #000;margin:20px 0px 0px 0px;"></div>
+			<div id="view_4" style="height:200px;width:320px;float:left;border:1px solid #000;margin:20px 0px 0px 30px;"></div>
+		</div>
+		<div id="chart" class="row" align="center" style="margin:10px 0px 0px 0px;display:block;">
+			<table class="table table-bordered table-striped table-hover" style="font-size:8px;">
+				<!—{loop $result $row}-->
+					<tr>
+						<td>$row['a']</td>
+						<td>$row['b']</td>
+						<td>$row['c']</td>
+						<td>$row['d']</td>
+						<td>$row['e']</td>
+					</tr>
+				<!—{/loop}-->
+			</table>
+		</div>
+		
+		
+    </div>
+    <script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('view_1')); 
+		var option = {
+            <!-- tooltip: { -->
+                <!-- show: true -->
+            <!-- }, -->
+            <!-- legend: { -->
+                <!-- data:['销量'] -->
+            <!-- }, -->
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["1991","1995","2000","2003","2004","2005","2008","2009","2010","2011","2012","2013"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "type":"bar",
+                    data: [{$result[1]['b']}, {$result[2]['b']}, {$result[3]['b']},{$result[4]['b']}, {$result[5]['b']}, {$result[6]['b']}, {$result[7]['b']},{$result[8]['b']}, {$result[9]['b']}, {$result[10]['b']}, {$result[11]['b']}, {$result[12]['b']}]
+                }
+            ]
+        };
+		myChart.setOption(option); 
+    </script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('view_2')); 
+		var option = {
+            <!-- tooltip: { -->
+                <!-- show: true -->
+            <!-- }, -->
+            <!-- legend: { -->
+                <!-- data:['销量'] -->
+            <!-- }, -->
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["1991","1995","2000","2003","2004","2005","2008","2009","2010","2011","2012","2013"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "type":"bar",
+                    data: [{$result[1]['c']}, {$result[2]['c']}, {$result[3]['c']},{$result[4]['c']}, {$result[5]['c']}, {$result[6]['c']}, {$result[7]['c']},{$result[8]['c']}, {$result[9]['c']}, {$result[10]['c']}, {$result[11]['c']}, {$result[12]['c']}]
+                }
+            ]
+        };
+		myChart.setOption(option); 
+    </script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('view_3')); 
+		var option = {
+            <!-- tooltip: { -->
+                <!-- show: true -->
+            <!-- }, -->
+            <!-- legend: { -->
+                <!-- data:['销量'] -->
+            <!-- }, -->
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["1991","1995","2000","2003","2004","2005","2008","2009","2010","2011","2012","2013"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "type":"bar",
+                    data: [{$result[1]['d']}, {$result[2]['d']}, {$result[3]['d']},{$result[4]['d']}, {$result[5]['d']}, {$result[6]['d']}, {$result[7]['d']},{$result[8]['d']}, {$result[9]['d']}, {$result[10]['d']}, {$result[11]['d']}, {$result[12]['d']}]
+                }
+            ]
+        };
+		myChart.setOption(option); 
+    </script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('view_4')); 
+		var option = {
+            <!-- tooltip: { -->
+                <!-- show: true -->
+            <!-- }, -->
+            <!-- legend: { -->
+                <!-- data:['销量'] -->
+            <!-- }, -->
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["1991","1995","2000","2003","2004","2005","2008","2009","2010","2011","2012","2013"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "type":"bar",
+                    data: [{$result[1]['e']}, {$result[2]['e']}, {$result[3]['e']},{$result[4]['e']}, {$result[5]['e']}, {$result[6]['e']}, {$result[7]['e']},{$result[8]['e']}, {$result[9]['e']}, {$result[10]['e']}, {$result[11]['e']}, {$result[12]['e']}]
+                }
+            ]
+        };
+		myChart.setOption(option); 
+    </script>
+</body>
+</html>

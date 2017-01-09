@@ -1,0 +1,35 @@
+<!--{template header}-->
+<div class="nav_bar">
+    <a href="{url category/view/all}">全部分类</a>
+    <!--{loop $navlist $nav}-->
+    &gt; <a href="{url category/view/$nav['id']}">{$nav['name']}</a> 
+    <!--{/loop}-->
+    <!--{if $cid!='all'}-->&gt; <span>{$category['name']}</span><!--{/if}-->
+</div>
+<div class="main_mod">
+    <h3 class="title"><!--{if $cid!='all'}-->{$category['name']}<!--{else}-->全部分类<!--{/if}--></h3>
+    <ul class="categorylist">
+        <!--{loop $sublist $index $sub}-->
+        <!--{if $sub['id']==$cid}-->
+        <li>{eval echo cutstr($sub['name'],10,'');}<em>({$sub['questions']})</em></li>
+        <!--{else}-->
+        <li><a href="{url category/view/$sub['id']}">{eval echo cutstr($sub['name'],10,'');}</a><em>({$sub['questions']})</em></li>
+        <!--{/if}-->
+        <!--{/loop}-->
+    </ul>
+</div>
+<div class="main_mod" style="padding: 0 10px 15px;">
+    <h3 class="title">共{$rownum}个问题</h3>
+    <!--{loop $questionlist $index $question}-->
+    <ul class="list">	    		
+        <li>
+            <span class="answer-number">{$question['answers']}回答</span>
+            <a href="{url question/view/$question['id']}" title="{$question['title']}">{eval echo cutstr($question['title'],50);}<!--{if in_array($question['status'],array(2,6))}--><img title="已解决" src="{SITE_URL}css/mobile/solved.gif" /><!--{/if}--></a>
+            <a class="type" href="{url category/view/$question['cid']}" title="{$question['category_name']}">[{eval echo cutstr($question['category_name'],10,'');}]</a>
+        </li>
+    </ul>
+    <!--{/loop}-->
+    
+</div>
+<div class="pages">{$departstr}</div>
+<!--{template footer}-->
